@@ -3,6 +3,7 @@ import argparse
 from cached_property import cached_property as reify
 from miniconfig import ConfiguratorCore, Control
 from enum import Enum
+from .parsertree import ParserTree
 
 
 class AnnotateType(Enum):
@@ -42,11 +43,17 @@ class WrappedArgumentParser(object):
         args = self.activate_callbacks(args, skip_at=AnnotateType.only)
         return args, rest
 
+    def __repr__(self):
+        return "<{} parser={!r} at {}>".format(self.__class__.__name__, self.parser, hex(id(self)))
+
 
 class ParserControl(Control):
     @reify
     def parser(self):
         return WrappedArgumentParser(argparse.ArgumentParser())
+
+    def make_parser(self, *args, **kwargs):
+        return argparse.ArgumentParser(*args, **kwargs)
 
 
 class Configurator(ConfiguratorCore):
@@ -73,3 +80,20 @@ class Configurator(ConfiguratorCore):
         self.include_defaults()
         self.commit()
         return self.parser.parse_known_args(argv)
+
+
+class ParserTreeControl(ParserControl):
+    @reify
+    def parser(self):
+        return WrappedArgumentParser(ParserTree())
+
+
+def get_configurator(*args, **kwargs):
+    return Configurator(*args, **kwargs)
+
+
+def get_support_subcommand_configurator(*args, **kwargs):
+    kwargs["control"] = ParserTreeControl()
+    config = Configurator(*args, **kwargs)
+    config.include("miniconfig_argparse.parsertree")
+    return config
