@@ -16,6 +16,7 @@ except IOError:
 
 install_requires = [
     'miniconfig',
+    'cached_property',
 ]
 
 
@@ -40,7 +41,7 @@ setup(name='miniconfig-argparse',
       author="podhmo",
       author_email="",
       url="",
-      packages=find_packages(exclude=["miniconfig_argparse.tests"]),
+      packages=find_packages(exclude=["miniconfig_argparse.tests", "examples"]),
       include_package_data=True,
       zip_safe=False,
       install_requires=install_requires,
