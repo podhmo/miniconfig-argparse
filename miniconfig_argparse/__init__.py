@@ -52,9 +52,6 @@ class ParserControl(Control):
     def parser(self):
         return WrappedArgumentParser(argparse.ArgumentParser())
 
-    def make_parser(self, *args, **kwargs):
-        return argparse.ArgumentParser(*args, **kwargs)
-
 
 class Configurator(ConfiguratorCore):
     DEFAULT_INCLUDES = [
@@ -89,11 +86,14 @@ class ParserTreeControl(ParserControl):
 
 
 def get_configurator(*args, **kwargs):
-    return Configurator(*args, **kwargs)
+    config = Configurator(*args, **kwargs)
+    config.include("miniconfig_argparse.transform")
+    return config
 
 
 def get_support_subcommand_configurator(*args, **kwargs):
     kwargs["control"] = ParserTreeControl()
     config = Configurator(*args, **kwargs)
+    config.include("miniconfig_argparse.transform")
     config.include("miniconfig_argparse.parsertree")
     return config
