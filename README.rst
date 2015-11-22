@@ -55,9 +55,9 @@ make_parser(fn) + call_function_as_command
 Using `make_parser()` and `call_function_as_command()` combinations are useful, sometimes.
 
 - `make_parser(fn)` -- creating parser from a function definition.
-- `call_function_as_command` -- call function using parsed argument obuject.
+- `call_function_as_command` -- call function using parsed argument object.
 
-Such like a below.
+Such as below.
 
 .. code-block:: python
 
