@@ -9,10 +9,10 @@ code
 .. code-block:: python
 
    import sys
-   from miniconfig_argparse import Configurator
+   from miniconfig_argparse import get_configurator
 
 
-   config = Configurator()
+   config = get_configurator()
    config.include("yourmodule")
    config.include("yourmodule.extra")
 
@@ -41,3 +41,48 @@ in yourmodule, using config like a below.
            return args
 
        parser.add_callback(setup_closure)
+
+default directives
+----------------------------------------
+
+- make_parser
+- replace_parser
+- call_function_as_command
+
+make_parser(fn) + call_function_as_command
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Using `make_parser()` and `call_function_as_command()` combinations are useful, sometimes.
+
+- `make_parser(fn)` -- creating parser from a function definition.
+- `call_function_as_command` -- call function using parsed argument obuject.
+
+Such like a below.
+
+.. code-block:: python
+
+   def greeting(message, is_surprised=False, name="foo"):
+       """ greeting message
+
+       :param message: message of greeting
+       :param is_surprised: surprised or not (default=False)
+       :param name: name of actor
+       """
+       suffix = "!" if is_surprised else ""
+       print("{name}: {message}{suffix}".format(name=name, message=message, suffix=suffix))
+
+
+   def includeme(config):
+       parser = config.make_parser(greeting)
+       config.replace_parser(parser)
+
+
+   if __name__ == "__main__":
+       import sys
+       from miniconfig_argparse import get_configurator
+       config = get_configurator()
+       config.include(includeme)
+
+       args = config.make_args(sys.argv[1:])
+       config.call_function_as_command(greeting, args)
+
