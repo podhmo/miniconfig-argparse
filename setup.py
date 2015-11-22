@@ -17,6 +17,7 @@ except IOError:
 install_requires = [
     'miniconfig',
     'cached_property',
+    'handofcats'
 ]
 
 
