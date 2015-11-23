@@ -15,6 +15,9 @@ class DictLike(object):
     def __setitem__(self, k, v):
         setattr(self.ob, k, v)
 
+    def get(self, k, default=None):
+        return getattr(self.ob, k, default)
+
 
 def includeme_from_handofcats(middleware):
     def includeme(config):
