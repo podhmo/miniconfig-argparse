@@ -31,7 +31,7 @@ testing_extras = tests_require + [
 ]
 
 setup(name='miniconfig-argparse',
-      version='0.0.1',
+      version='0.0.2',
       description='argparser factory for miniconfig',
       long_description=README + '\n\n' + CHANGES,
       classifiers=[
