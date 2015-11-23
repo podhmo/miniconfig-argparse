@@ -31,7 +31,7 @@ testing_extras = tests_require + [
 ]
 
 setup(name='miniconfig-argparse',
-      version='0.0.0',
+      version='0.0.1',
       description='argparser factory for miniconfig',
       long_description=README + '\n\n' + CHANGES,
       classifiers=[
@@ -41,7 +41,7 @@ setup(name='miniconfig-argparse',
       keywords='miniconfig, argparse',
       author="podhmo",
       author_email="",
-      url="",
+      url="https://github.com/podhmo/miniconfig-argparse",
       packages=find_packages(exclude=["miniconfig_argparse.tests", "examples"]),
       include_package_data=True,
       zip_safe=False,
