@@ -1,9 +1,12 @@
 # -*- coding:utf-8 -*-
 import argparse
 from cached_property import cached_property as reify
-from miniconfig import ConfiguratorCore, Control
+from miniconfig import ConfiguratorCore, Control, PHASE1_CONFIG
 from enum import Enum
 from .parsertree import ParserTree
+
+
+PHASE0_CONFIG = PHASE1_CONFIG - 10
 
 
 class AnnotateType(Enum):
@@ -87,13 +90,17 @@ class ParserTreeControl(ParserControl):
 
 def get_configurator(*args, **kwargs):
     config = Configurator(*args, **kwargs)
-    config.include("miniconfig_argparse.transform")
+    config.include(includeme)
     return config
 
 
 def get_support_subcommand_configurator(*args, **kwargs):
     kwargs["control"] = ParserTreeControl()
     config = Configurator(*args, **kwargs)
-    config.include("miniconfig_argparse.transform")
+    config.include(includeme)
     config.include("miniconfig_argparse.parsertree")
     return config
+
+
+def includeme(config):
+    config.include("miniconfig_argparse.transform")
