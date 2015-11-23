@@ -26,7 +26,7 @@ class ParserTree(object):
 
     @reify
     def parser(self):
-        parser = argparse.ArgumentParser()
+        parser = argparse.ArgumentParser(prog=self.name, add_help=False)
         parser.add_argument(self.dest, choices=[])
         return parser
 

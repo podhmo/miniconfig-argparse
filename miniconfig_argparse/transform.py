@@ -30,7 +30,9 @@ def parser_from_function(fn, prog=None):
     help_dict = handofcats.get_help_dict(doc)
     description = handofcats.get_description(doc)
     parser_creator = handofcats.ArgumentParserCreator(argspec, help_dict, description)
-    return parser_creator.create_parser(prog)
+    parser = parser_creator.create_parser(prog)
+    parser.set_defaults(fn=fn)
+    return parser
 
 
 def make_parser(config, prog=None, *args, **kwargs):
