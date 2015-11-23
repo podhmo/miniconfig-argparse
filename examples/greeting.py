@@ -25,6 +25,5 @@ if __name__ == "__main__":
     from miniconfig_argparse import get_configurator
     config = get_configurator()
     config.include(includeme)
-
     args = config.make_args(sys.argv[1:])
     config.call_function_as_command(greeting, args)

@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 import sys
 from miniconfig_argparse import Configurator
-import handofcats
+
 
 def includeme(config):
     parser = config.parser
