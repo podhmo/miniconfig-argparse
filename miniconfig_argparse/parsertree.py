@@ -53,10 +53,10 @@ class ParserTree(object):
         if name not in choices:
             choices.append(name)
 
-    def parse_known_args(self, argv):
+    def parse_known_args(self, argv=None):
         return self.parser.parse_known_args(argv)
 
-    def parse_args(self, argv):
+    def parse_args(self, argv=None):
         args, rest = self.parse_known_args(argv)
         name = getattr(args, self.dest)
         subargs = self.children[name].parse_args(rest)

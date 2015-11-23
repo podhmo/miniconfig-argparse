@@ -8,7 +8,6 @@ code
 
 .. code-block:: python
 
-   import sys
    from miniconfig_argparse import get_configurator
 
 
@@ -16,7 +15,7 @@ code
    config.include("yourmodule")
    config.include("yourmodule.extra")
 
-   args = config.make_args(sys.argv[1:])
+   args = config.make_args()
    # using args
 
 in yourmodule, using config like a below.
@@ -78,11 +77,10 @@ Such as below.
 
 
    if __name__ == "__main__":
-       import sys
        from miniconfig_argparse import get_configurator
        config = get_configurator()
        config.include(includeme)
 
-       args = config.make_args(sys.argv[1:])
+       args = config.make_args()
        config.call_function_as_command(greeting, args)
 

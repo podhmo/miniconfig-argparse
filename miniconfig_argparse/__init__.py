@@ -71,12 +71,12 @@ class Configurator(ConfiguratorCore):
             for f in self.DEFAULT_INCLUDES:
                 self.include(f)
 
-    def make_args(self, argv):
+    def make_args(self, argv=None):
         self.include_defaults()
         self.commit()
         return self.parser.parse_args(argv)
 
-    def make_partial_args(self, argv):
+    def make_partial_args(self, argv=None):
         self.include_defaults()
         self.commit()
         return self.parser.parse_known_args(argv)

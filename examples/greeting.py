@@ -21,9 +21,8 @@ def includeme(config):
 
 
 if __name__ == "__main__":
-    import sys
     from miniconfig_argparse import get_configurator
     config = get_configurator()
     config.include(includeme)
-    args = config.make_args(sys.argv[1:])
+    args = config.make_args()
     config.call_function_as_command(greeting, args)
