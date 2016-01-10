@@ -31,14 +31,14 @@ testing_extras = tests_require + [
 ]
 
 setup(name='miniconfig-argparse',
-      version='0.0.2',
+      version='0.0.3',
       description='argparser factory for miniconfig',
       long_description=README + '\n\n' + CHANGES,
       classifiers=[
           "Programming Language :: Python",
           "Programming Language :: Python :: Implementation :: CPython",
       ],
-      keywords='miniconfig, argparse',
+      keywords=["miniconfig", "argparse", "commandline"],
       author="podhmo",
       author_email="",
       url="https://github.com/podhmo/miniconfig-argparse",
