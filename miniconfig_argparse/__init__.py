@@ -62,7 +62,7 @@ class Configurator(ConfiguratorCore):
     ]
 
     def __init__(self, settings=None, module=None, control=None, skip_defaults=False):
-        control = control or ParserControl()
+        control = control or ParserControl(settings)
         super(Configurator, self).__init__(settings, module, control)
         self.skip_defaults = skip_defaults
 
@@ -95,7 +95,7 @@ def get_configurator(*args, **kwargs):
 
 
 def get_support_subcommand_configurator(*args, **kwargs):
-    kwargs["control"] = ParserTreeControl()
+    kwargs["control"] = ParserTreeControl({})  # xxx
     config = Configurator(*args, **kwargs)
     config.include(includeme)
     config.include("miniconfig_argparse.parsertree")
