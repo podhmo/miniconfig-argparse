@@ -40,7 +40,7 @@ def parser_from_function(fn, prog=None, skip_options=None):
 
 def make_parser(config, prog=None, *args, **kwargs):
     if callable(prog):
-        return parser_from_function(prog)
+        return parser_from_function(prog, *args, **kwargs)
     else:
         return argparse.ArgumentParser(prog, *args, **kwargs)
 
