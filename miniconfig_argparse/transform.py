@@ -27,13 +27,13 @@ def includeme_from_handofcats(middleware):
     return includeme
 
 
-def parser_from_function(fn, prog=None):
+def parser_from_function(fn, prog=None, skip_options=None):
     argspec = inspect.getargspec(fn)
     doc = fn.__doc__ or ""
     help_dict = handofcats.get_help_dict(doc)
     description = handofcats.get_description(doc)
     parser_creator = handofcats.ArgumentParserCreator(argspec, help_dict, description)
-    parser = parser_creator.create_parser(prog)
+    parser = parser_creator.create_parser(prog, skip_options=skip_options)
     parser.set_defaults(fn=fn)
     return parser
 
